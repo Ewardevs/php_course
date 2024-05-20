@@ -12,14 +12,39 @@
             Nombre :
             <input type="text" name="nombre" value="{{ $curso->nombre }}">
         </label>
+        @error('nombre')
+            <br>
+            {{ $message }}
+            <br>
+        @enderror
         <label for="descripcion">
             Descripcion :
             <textarea type="text" name="descripcion">{{ $curso->descripcion }}</textarea>
         </label>
+        @error('descripcion')
+            <br>
+            {{ $message }}
+            <br>
+        @enderror
         <label for="categoria">
             Categoria :
             <input type="text" name="categoria" value="{{ $curso->categoria }}">
         </label>
+        @error('categoria')
+            <br>
+            {{ $message }}
+            <br>
+        @enderror
+        <label for="name">
+            slug :
+            <input type="text" name="slug" value="{{ old('slug', $curso->slug) }}">
+        </label>
+        @error('slug')
+            <br>
+            {{ $message }}
+            <br>
+        @enderror
+        <br>
 
         <br>
         <button type="submit">actualizar</button>

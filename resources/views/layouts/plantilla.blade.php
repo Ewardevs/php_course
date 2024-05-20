@@ -8,8 +8,14 @@
 
     <title>@yield('title')</title>
 </head>
+<style>
+    .active {
+        color: red;
+    }
+</style>
 
 <body>
+    @include('layouts/partes/header')
     @yield('content')
 </body>
 

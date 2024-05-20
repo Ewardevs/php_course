@@ -4,14 +4,14 @@
 
 @section('content')
 
-    <a href="#">Bienvenido a la pagina Principal</a>
+    <a>Bienvenido a la pagina Principal</a>
     <a href="{{ route('cursos.create') }}">Crear curso</a>
 
 
     <ul>
         @foreach ($cursos as $curso)
             <li>
-                <a href="{{ route('cursos.show', $curso['id']) }}">
+                <a href="{{ route('cursos.show', $curso) }}">
                     <?= $curso['nombre'] ?>
                 </a>
             </li>

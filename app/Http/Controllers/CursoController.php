@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\StoreCurso;
 use Illuminate\Http\Request;
 
 use App\Models\Curso;
@@ -23,20 +23,18 @@ class CursoController extends Controller
         return view("cursos.create");
     }
 
-    public function store(Request $request)
+    public function store(StoreCurso $request)
     {
-        $request->validate([
-            "nombre" => "required",
-            "descripcion" => "required",
-            "categoria" => "required"
-        ]);
 
 
-        $curso = new Curso();
-        $curso->nombre = $request->nombre;
-        $curso->descripcion = $request->descripcion;
-        $curso->categoria = $request->categoria;
-        $curso->save();
+        // $curso = new Curso();
+        // $curso->nombre = $request->nombre;
+        // $curso->descripcion = $request->descripcion;
+        // $curso->categoria = $request->categoria;
+        // $curso->save();
+
+
+        $curso = Curso::create($request->all());
 
         return redirect()->route("cursos.show", $curso);
     }
@@ -54,10 +52,24 @@ class CursoController extends Controller
 
     public function update(Request $request, Curso $curso)
     {
-        $curso->nombre = $request->nombre;
-        $curso->descripcion = $request->descripcion;
-        $curso->categoria = $request->categoria;
-        $curso->save();
+        $request->validate([
+            "nombre" => "required",
+            "descripcion" => "required",
+            "categoria" => "required",
+            "slug" => "required|unique:cursos,slug," . $curso->id
+        ]);
+        // $curso->nombre = $request->nombre;
+        // $curso->descripcion = $request->descripcion;
+        // $curso->categoria = $request->categoria;
+        // $curso->save();
+        $curso->update($request->all());
         return redirect()->route("cursos.show", $curso);
+    }
+
+    public function destroy(Curso $curso)
+    {
+
+        $curso->delete();
+        return redirect()->route("cursos.index");
     }
 }

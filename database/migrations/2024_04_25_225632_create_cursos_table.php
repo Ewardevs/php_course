@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use LaravelLang\Development\Services\Compilers\Table;
 
 return new class extends Migration
 {
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->string("nombre");
             $table->text("descripcion");
             $table->string("categoria");
+            $table->string("slug")->unique();
             $table->timestamps();
         });
     }
